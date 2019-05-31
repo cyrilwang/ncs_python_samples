@@ -50,7 +50,7 @@ while True:
         break
     frame = imutils.resize(frame, width=400)
 
-	# 將圖片轉換成 4 維的 blob 陣列
+    # 將圖片轉換成 4 維的 blob 陣列
     blob = cv2.dnn.blobFromImage(frame, 0.007843, (300, 300), 127.5)
 
     # 進行推論 (inference)
