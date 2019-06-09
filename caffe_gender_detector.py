@@ -10,6 +10,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--prototxt", required=True, help="path to the prototxt file")
 ap.add_argument("-m", "--model", required=True, help="help to the caffe model file")
 ap.add_argument("--path", help="path to image file")
+ap.add_argument("-t", "--target", help="which device should be used for inference")
 args = vars(ap.parse_args())
 
 # 定義模型訓練圖片的平均值
