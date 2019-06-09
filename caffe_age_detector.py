@@ -8,7 +8,7 @@ import cv2
 # 定義程式執行時的輸入參數
 ap = argparse.ArgumentParser()
 ap.add_argument("-p", "--prototxt", required=True, help="path to the prototxt file")
-ap.add_argument("-m", "--model", required=True, elp="help to the caffe model file")
+ap.add_argument("-m", "--model", required=True, help="help to the caffe model file")
 ap.add_argument("--path", help="path to image file")
 ap.add_argument("-t", "--target", help="which device should be used for inference")
 args = vars(ap.parse_args())
