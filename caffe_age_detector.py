@@ -26,23 +26,23 @@ else:
     caffe_age_net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
 
-# 用來判斷年紀並加以標示的函式
+# 用來判斷年紀區間並加以標示的函式
 def detect_age_by_caffe(face):
     # 將圖片轉換為 np.array，並作為模型的推論輸入
     blob = cv2.dnn.blobFromImage(face, 1.0, (227, 227), MODEL_MEAN_VALUES)
     caffe_age_net.setInput(blob)
     # 進行推論
     age_detections = caffe_age_net.forward()
-    # 取得機率較高推論所代表的性別
+    # 取得機率較高推論所代表的年紀區間
     age = AGES_FOR_CAFFE [age_detections[0].argmax()]
-    # 準備顯示用的文字，包含性別與該性別的機率
+    # 準備顯示用的文字，包含年紀區間與該年紀區間的機率
     text = "age : {}, conf = {:.4f}".format(age, age_detections[0].max())
     cv2.putText(face, text, (10, 20), cv2.FONT_HERSHEY_SIMPLEX, 0.4, (0, 0, 255), 1)
     # 回傳標示過的圖片
     return face
 
 
-# 讀取目錄下的所有檔案 (圖片)，取得檔名後讀入影片、呼叫判斷性別的函式，並將結果顯示出來
+# 讀取目錄下的所有檔案 (圖片)，取得檔名後讀入影片、呼叫判斷判斷年紀區間的函式，並將結果顯示出來
 for file in glob.glob(args["path"] + '/*'):
     filename = str(file)
     image = cv2.imread(filename)
