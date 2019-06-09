@@ -19,6 +19,7 @@ MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 GENDERS_FOR_CAFFE = ['Male', 'Female']
 # 根據訓練好的模型建立推論用的 CNN 網路
 caffe_gender_net = cv2.dnn.readNet(args["model"], args["prototxt"])
+# 是否使用 NCS/NCS2 進行推論
 if args['target'] == 'vpu':
     caffe_gender_net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
 else:
