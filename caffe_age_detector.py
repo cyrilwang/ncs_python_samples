@@ -7,11 +7,10 @@ import cv2
 
 # 定義程式執行時的輸入參數
 ap = argparse.ArgumentParser()
-ap.add_argument("-p", "--prototxt", required=True,
-                help="path to the prototxt file")
-ap.add_argument("-m", "--model", required=True,
-                help="help to the caffe model file")
+ap.add_argument("-p", "--prototxt", required=True, help="path to the prototxt file")
+ap.add_argument("-m", "--model", required=True, elp="help to the caffe model file")
 ap.add_argument("--path", help="path to image file")
+ap.add_argument("-t", "--target", help="which device should be used for inference")
 args = vars(ap.parse_args())
 
 # 定義模型訓練圖片的平均值
@@ -20,6 +19,10 @@ MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 AGES_FOR_CAFFE = ['(0, 2)', '(4, 6)', '(8, 12)', '(15, 20)', '(25, 32)', '(38, 43)', '(48, 53)', '(60, 100)']
 # 根據訓練好的模型建立推論用的 CNN 網路
 caffe_age_net = cv2.dnn.readNet(args["model"], args["prototxt"])
+if args['target'] == 'vpu':
+    caffe_age_net.setPreferableTarget(cv2.dnn.DNN_TARGET_MYRIAD)
+else:
+    caffe_age_net.setPreferableTarget(cv2.dnn.DNN_TARGET_CPU)
 
 
 # 用來判斷年紀並加以標示的函式
