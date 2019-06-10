@@ -46,11 +46,11 @@ def detect_age_and_gender_by_openvino(frame):
         blob = cv2.dnn.blobFromImage(face, size=(62, 62), ddepth=cv2.CV_8U)
         openvino_net.setInput(blob)
         # 進行推論
-        gender_detections = openvino_net.forwardAndRetrieve(['prob', 'age_conv3'])
+        detections = openvino_net.forwardAndRetrieve(['prob', 'age_conv3'])
         # 取得機率較高推論所代表的性別
-        gender = GENDERS_FOR_OPENVINO[gender_detections[0][0][0].argmax()]
+        gender = GENDERS_FOR_OPENVINO[detections[0][0][0].argmax()]
         # 計算推論的年紀
-        age = gender_detections[1][0][0][0][0][0] * 100
+        age = detections[1][0][0][0][0][0] * 100
         # 準備顯示用的文字，包含性別與年紀
         text = "gender = {}, age = {:.0f}".format(gender, age)
         # 根據不同性別採用不同顏色的顯示文字
