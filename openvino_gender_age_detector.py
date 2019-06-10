@@ -55,6 +55,6 @@ def detect_age_and_gender_by_openvino(frame):
 for file in glob.glob(args["path"] + '/*'):
     filename = str(file)
     image = cv2.imread(filename)
-    openvino_image = detect_age_and_gender_by_openvino(image.copy())
+    openvino_image = detect_age_and_gender_by_openvino(image)
     cv2.imshow("OpenVINO", openvino_image)
     cv2.waitKey(0)
