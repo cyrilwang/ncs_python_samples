@@ -47,7 +47,7 @@ def detect_gender_by_caffe(face):
     return face
 
 
-# 讀取目錄下的所有檔案 (圖片)，取得檔名後讀入影片、呼叫判斷性別的函式，並將結果顯示出來
+# 讀取目錄下的所有檔案 (圖片)，取得檔名後讀入圖片、呼叫判斷性別的函式，並將結果顯示出來
 for file in glob.glob(args["path"] + '/*'):
     filename = str(file)
     image = cv2.imread(filename)
